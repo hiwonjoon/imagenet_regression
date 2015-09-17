@@ -1,7 +1,7 @@
-BATCH_SIZE = 256
+BATCH_SIZE = 128
 CLIP_DELTA = 10.0
-LEARNING_RATE = 0.01
-RHO = 0.99
+LEARNING_RATE = 1
+RHO = 0.90
 RMS_EPSILON = 0.0001
 
 import lasagne
@@ -57,9 +57,9 @@ class Net:
 
         dist = T.sum(lasagne.objectives.squared_error(fv1,fv2),axis=1) ** 0.5
         diff = target_distance - dist
-        loss_before_clipped = T.mean(diff**2) * 0.5
+        loss_before_clipped = T.mean(diff**2) ** 0.5
         diff = diff.clip(-CLIP_DELTA,CLIP_DELTA)
-        loss = T.mean(diff**2) * 0.5
+        loss = T.mean(diff**2) ** 0.5
 
         params = lasagne.layers.get_all_params(net_fv,trainable=True)
         updates = lasagne.updates.rmsprop(loss, params, LEARNING_RATE, RHO, RMS_EPSILON)
