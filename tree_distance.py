@@ -45,7 +45,7 @@ class Distance :
         synset_list_2012 = [wnid.strip() for wnid in synset_list_2012]
         num_class = len(synset_list_2012)
 
-        distance_matrix = np.zeros((num_class,num_class),np.uint32)
+        distance_matrix = np.zeros((num_class,num_class),np.float32)
         for i in range(num_class) :
             for j in range(i,num_class) :
                 p1 = Set(); p2 = Set();
@@ -62,7 +62,7 @@ class Distance :
             print 'length unequal'
             return
 
-        ret = np.zeros((len(ims1),1),np.int32)
+        ret = np.zeros((len(ims1),1),np.float32)
         for i in range(len(ims1)) :
             ret[i,0] = self.distance_matrix[ims1[i][0],ims2[i][0]]
         return ret
