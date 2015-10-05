@@ -11,11 +11,11 @@ class DataLoader :
         with open(train_txt,"r") as file :
             for line in file:
                 loc, label = line.strip().split(' ')
-                self.train_ims.append( (int(label),path.join(dataset_loc+'/train/'+loc)) )
+                self.train_ims.append( (int(label),path.join(dataset_loc+'/train_resized/'+loc)) )
         with open(val_txt,"r") as file :
             for line in file:
                 loc, label = line.strip().split(' ')
-                self.val_ims.append( (int(label),path.join(dataset_loc+'/val/'+loc)) )
+                self.val_ims.append( (int(label),path.join(dataset_loc+'/val_resized/'+loc)) )
 
         #for cla_idx, cla in enumerate(classes) :
         #    self.train_ims.extend([ (cla_idx,path.join(traindir+'/'+cla,f)) for f in os.listdir(traindir+'/'+cla) if path.isfile(path.join(traindir+'/'+cla,f)) ])
