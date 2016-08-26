@@ -58,11 +58,13 @@ class Distance :
         Input - Leaf Label[int; of synsets.txt]
         Return- Return vectors of one 
         """
-        ret = np.zeros((len(self.synset_list),),np.float32)
+        ret = np.zeros((len(self.synset_list)*2,),np.float32)
+        ret[0:len(self.synset_list)] = 1
         
         parents = Set()
         self._get_parents(self.nodes_dict[self.synset_list[leaf_label]],parents)
         
         for node in parents :
-            ret[ self.label_to_synset[node.wnid] ] = 1
+            ret[ self.label_to_synset[node.wnid] ] = 0
+            ret[ len(self.synset_list)+self.label_to_synset[node.wnid] ] = 1
         return ret
